@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+Sinhala:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Tiro+Sinhala:ital@0;1&display=swap');
+
+@import "tailwindcss";
+
+/* Tailwind v4 design tokens (replaces tailwind.config.js theme.extend) */
+@theme {
+  --color-vesak-darkest: #0a0612;
+  --color-vesak-dark: #120d1f;
+  --color-vesak-mid: #1e1535;
+  --color-vesak-purple: #2d1f4e;
+  --color-vesak-gold: #d4a017;
+  --color-vesak-gold-light: #f5c842;
+  --color-vesak-amber: #e8890c;
+  --color-vesak-lotus: #e8536a;
+  --color-vesak-lotus-light: #f4a0b0;
+  --color-vesak-saffron: #f97316;
+  --color-vesak-cream: #fdf6e3;
+  --color-vesak-moon: #fffef0;
+
+  --font-display: "Cinzel Decorative", serif;
+  --font-body: "Cormorant Garamond", serif;
+  --font-sinhala: "Noto Serif Sinhala", serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+/* Aliases for custom CSS that uses --vesak-* variables */
+:root {
+  --vesak-darkest: var(--color-vesak-darkest);
+  --vesak-dark: var(--color-vesak-dark);
+  --vesak-mid: var(--color-vesak-mid);
+  --vesak-purple: var(--color-vesak-purple);
+  --vesak-gold: var(--color-vesak-gold);
+  --vesak-gold-light: var(--color-vesak-gold-light);
+  --vesak-amber: var(--color-vesak-amber);
+  --vesak-lotus: var(--color-vesak-lotus);
+  --vesak-lotus-light: var(--color-vesak-lotus-light);
+  --vesak-saffron: var(--color-vesak-saffron);
+  --vesak-cream: var(--color-vesak-cream);
+  --vesak-moon: var(--color-vesak-moon);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--vesak-darkest);
+  color: var(--vesak-cream);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--vesak-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--vesak-gold);
+  border-radius: 3px;
+}
+
+/* Gold shimmer text */
+.gold-shimmer {
+  background: linear-gradient(90deg, #d4a017 0%, #f5c842 25%, #fffef0 50%, #f5c842 75%, #d4a017 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Ornamental border */
+.ornamental-border {
+  position: relative;
+}
+
+.ornamental-border::before,
+.ornamental-border::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1px;
+  width: 80%;
+  background: linear-gradient(90deg, transparent, var(--vesak-gold), transparent);
+}
+
+.ornamental-border::before { top: 0; }
+.ornamental-border::after { bottom: 0; }
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(30, 21, 53, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+/* Lotus glow */
+.lotus-glow {
+  filter: drop-shadow(0 0 12px rgba(232, 83, 106, 0.6));
+}
+
+/* Gold glow */
+.gold-glow {
+  filter: drop-shadow(0 0 15px rgba(212, 160, 23, 0.7));
+}
+
+/* Vesak button */
+.vesak-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d4a017, #e8890c);
+  color: var(--vesak-darkest);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 220, 100, 0.5);
+}
+
+.vesak-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vesak-btn:hover::before {
+  opacity: 1;
+}
+
+.vesak-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 160, 23, 0.5);
+}
+
+.vesak-btn:disabled {
+  cursor: wait;
+}
+
+/* Input fields */
+.vesak-input {
+  background: rgba(10, 6, 18, 0.6);
+  border: 1px solid rgba(212, 160, 23, 0.25);
+  color: var(--vesak-cream);
+  transition: all 0.3s ease;
+}
+
+.vesak-input:focus {
+  outline: none;
+  border-color: rgba(212, 160, 23, 0.7);
+  box-shadow: 0 0 20px rgba(212, 160, 23, 0.2);
+  background: rgba(10, 6, 18, 0.8);
+}
+
+.vesak-input::placeholder {
+  color: rgba(253, 246, 227, 0.35);
+}
+
+/* Textarea */
+.vesak-textarea {
+  background: rgba(10, 6, 18, 0.6);
+  border: 1px solid rgba(212, 160, 23, 0.25);
+  color: var(--vesak-cream);
+  resize: none;
+  transition: all 0.3s ease;
+}
+
+.vesak-textarea:focus {
+  outline: none;
+  border-color: rgba(212, 160, 23, 0.7);
+  box-shadow: 0 0 20px rgba(212, 160, 23, 0.2);
+}
+
+.vesak-textarea::placeholder {
+  color: rgba(253, 246, 227, 0.35);
+}
+
+/* Floating petals */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-50px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  5% { opacity: 0.8; }
+  95% { opacity: 0.6; }
+  100% {
+    transform: translateY(105vh) rotate(960deg) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Section labels */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vesak-gold);
+  opacity: 0.8;
+}
+
+/* Star particles */
+.star-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Selected image highlight */
+.image-selected {
+  box-shadow: 0 0 0 3px var(--vesak-gold), 0 0 20px rgba(212, 160, 23, 0.5);
+}
+
+/* Card preview shadow */
+.card-shadow {
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(212, 160, 23, 0.15),
+    inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Poem text */
+.poem-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  line-height: 2;
+  color: var(--vesak-cream);
+}
+
+.poem-text-sinhala {
+  font-family: var(--font-sinhala);
+  line-height: 2;
+  color: var(--vesak-cream);
+}
+
+/* Toggle switch */
+.lang-toggle {
+  position: relative;
+  display: inline-flex;
+  background: rgba(10, 6, 18, 0.8);
+  border: 1px solid rgba(212, 160, 23, 0.3);
+  border-radius: 50px;
+  padding: 4px;
+}
+
+.lang-toggle-option {
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(253, 246, 227, 0.5);
+  background: transparent;
+  border: none;
+}
+
+.lang-toggle-option.active {
+  background: linear-gradient(135deg, #d4a017, #e8890c);
+  color: var(--vesak-darkest);
+  box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
+}
+
+/* Download button pulse */
+@keyframes downloadPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 160, 23, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(212, 160, 23, 0.8), 0 0 60px rgba(212, 160, 23, 0.3); }
+}
+
+.download-pulse {
+  animation: downloadPulse 2s ease-in-out infinite;
+}
+
+.download-pulse.done {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  animation: none;
+}
+
+/* Responsive canvas */
+#vesak-card-canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Moon gradient */
+.moon-gradient {
+  background: radial-gradient(circle, #fffef0 30%, #fdf6e3 60%, rgba(253, 246, 227, 0) 100%);
+}
+
+/* Mandala spin */
+.mandala-slow {
+  animation: spin 30s linear infinite;
+}
+
+/* Lotus bloom */
+@keyframes lotusBlooom {
+  0% { transform: scale(0.8) rotate(-5deg); opacity: 0.6; }
+  50% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  100% { transform: scale(0.8) rotate(-5deg); opacity: 0.6; }
+}
+
+.lotus-bloom {
+  animation: lotusBlooom 5s ease-in-out infinite;
+}
