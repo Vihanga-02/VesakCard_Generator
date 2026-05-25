@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 
 export const metadata: Metadata = {
-  title: 'Vesak Card Generator | වෙසක් කාඩ් නිර්මාතෘ',
-  description: 'Create beautiful Vesak greeting cards with traditional Sinhala poetry and blessings.',
-  keywords: 'vesak, card generator, sinhala, buddhist, vesak 2025',
+  title: 'Vesak Card Designer',
+  description: 'Create beautiful Vesak greeting cards with traditional Sinhala/English poetry and blessings.',
+  keywords: 'vesak, card designer, sinhala, buddhist, vesak 2026, greeting cards, blessings, poetry',
   icons: {
     icon: '/favicon.ico',
   },
   openGraph: {
-    title: 'Vesak Card Generator',
+    title: 'Vesak Card Designer',
     description: 'Create beautiful Vesak greeting cards',
     type: 'website',
   },

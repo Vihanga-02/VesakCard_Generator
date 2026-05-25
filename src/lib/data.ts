@@ -87,7 +87,7 @@ export const DEFAULT_VESAK_IMAGES: CardImage[] = [
   },
   {
     id: 'lotus-pond',
-    src: '/images/vesak5.svg',
+    src: '/images/vesak5.png',
     alt: 'Lotus flowers in pond',
     label: 'Sacred Lotus',
   },
@@ -102,8 +102,8 @@ export const DEFAULT_VESAK_IMAGES: CardImage[] = [
 export const UI_TEXT = {
   si: {
     title: 'Vesak Card',
-    subtitle: 'Generator',
-    tagline: 'ශ්‍රී සද්ධර්ම ජොතිය',
+    subtitle: 'Designer',
+    tagline: 'සිත් ආලෝකමත් වේවා!',
     step1: 'පින්තූරය තෝරන්න',
     step2: 'සුභ පැතුම් කවිය',
     step3: 'යවන්නා',
@@ -119,14 +119,14 @@ export const UI_TEXT = {
     selectPoem: 'කවිය තෝරන්න',
     customPoem: 'ඔබේ කවිය ලියන්න',
     customPoemPlaceholder: 'ඔබේ සිතුවිලි මෙහි ලියන්න...',
-    happyVesak: 'ප්‍රීති වෙසක් !',
+    happyVesak: 'දහම් සිසිලස පිරේවා !',
     cardBack: 'කාඩ් පිටුපස',
     selectImage: 'පින්තූරය තෝරන්න',
     orUpload: 'හෝ ඔබේ පින්තූරය',
   },
   en: {
     title: 'Vesak Card',
-    subtitle: 'Generator',
+    subtitle: 'Designer',
     tagline: 'Sacred Light of Dhamma',
     step1: 'Choose Image',
     step2: 'Select Blessing',
