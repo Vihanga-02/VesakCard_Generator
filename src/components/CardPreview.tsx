@@ -44,54 +44,56 @@ export default function CardPreview({
     : poem?.titleEn ?? ''
 
   const labelFont = language === 'si' ? fontSi : fontEnDisplay
+  const poemSizeClass =
+    poemLines.length > 4
+      ? 'text-[clamp(0.46rem,2.3cqw,0.54rem)] sm:text-[clamp(0.55rem,2.6cqw,0.65rem)]'
+      : 'text-[clamp(0.5rem,2.5cqw,0.58rem)] sm:text-[clamp(0.55rem,2.9cqw,0.7rem)]'
 
   return (
     <div
       id="vesak-card-preview"
-      className="relative w-full rounded-2xl overflow-hidden card-shadow"
+      className="@container relative w-full aspect-3/2 rounded-2xl overflow-hidden card-shadow"
       style={{
         background: `linear-gradient(135deg, ${vesak.darkest} 0%, ${vesak.mid} 50%, ${vesak.dark} 100%)`,
-        aspectRatio: '3/2',
-        minHeight: '300px',
       }}
     >
       {/* Decorative border */}
       <div
-        className="absolute inset-2 rounded-xl border pointer-events-none z-10"
+        className="absolute inset-1.5 sm:inset-2 rounded-xl border pointer-events-none z-10"
         style={{ borderColor: vesakRgb('gold', 0.25) }}
       />
       <div
-        className="absolute inset-3 rounded-xl border pointer-events-none z-10"
+        className="absolute inset-2 sm:inset-3 rounded-xl border pointer-events-none z-10"
         style={{ borderColor: vesakRgb('gold', 0.1) }}
       />
 
       {/* Corner ornaments */}
-      <div className="absolute top-4 left-4 z-10 pointer-events-none">
+      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 pointer-events-none">
         <div
           className="w-6 h-6 border-t-2 border-l-2 rounded-tl-sm"
           style={{ borderColor: vesakRgb('gold', 0.6) }}
         />
       </div>
-      <div className="absolute top-4 right-4 z-10 pointer-events-none">
+      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 pointer-events-none">
         <div
           className="w-6 h-6 border-t-2 border-r-2 rounded-tr-sm"
           style={{ borderColor: vesakRgb('gold', 0.6) }}
         />
       </div>
-      <div className="absolute bottom-4 left-4 z-10 pointer-events-none">
+      <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 z-10 pointer-events-none">
         <div
           className="w-6 h-6 border-b-2 border-l-2 rounded-bl-sm"
           style={{ borderColor: vesakRgb('gold', 0.6) }}
         />
       </div>
-      <div className="absolute bottom-4 right-4 z-10 pointer-events-none">
+      <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 z-10 pointer-events-none">
         <div
           className="w-6 h-6 border-b-2 border-r-2 rounded-br-sm"
           style={{ borderColor: vesakRgb('gold', 0.6) }}
         />
       </div>
 
-      <div className="flex h-full">
+      <div className="absolute inset-0 flex min-h-0">
         {/* Left - Image side */}
         <div className="w-[45%] relative overflow-hidden shrink-0">
           <img
@@ -107,14 +109,13 @@ export default function CardPreview({
             }}
           />
           <div
-            className="absolute left-0 right-0 px-3 py-1 text-center"
+            className="absolute left-0 right-0 px-2 py-0.5 sm:px-3 sm:py-1 text-center bottom-[0.85rem] sm:bottom-[1.30rem]"
             style={{
-              bottom: '1.30rem',
               background: `linear-gradient(to top, ${vesakRgb('purple', 0.80)}, ${vesakRgb('mid', 0.70)}, transparent)`,
             }}
           >
             <p
-              className="text-xs sm:text-sm tracking-wider"
+              className="text-[10px] sm:text-sm tracking-wider"
               style={{
                 color: vesak.gold,
                 fontFamily: language === 'si' ? fontSi : fontEnDisplay,
@@ -126,10 +127,10 @@ export default function CardPreview({
         </div>
 
         {/* Right - Text side */}
-        <div className="flex-1 flex flex-col justify-between p-4 sm:p-6 relative">
-          <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
+        <div className="flex-1 flex flex-col min-h-0 p-2.5 sm:p-6 relative gap-0.5 sm:gap-0">
+          <div className="absolute top-2 right-2 sm:top-5 sm:right-5 z-10 pointer-events-none">
             <div
-              className="w-12 h-14 sm:w-16 sm:h-20 border rounded flex items-center justify-center"
+              className="w-9 h-11 sm:w-16 sm:h-20 border rounded flex items-center justify-center"
               style={{
                 background: vesakRgb('gold', 0.05),
                 borderColor: vesakRgb('gold', 0.3),
@@ -150,28 +151,26 @@ export default function CardPreview({
             </div>
           </div>
 
-          {toName && (
-            <div className="mb-2">
+            <div className="shrink-0 mb-0.5 sm:mb-2 pr-10 sm:pr-0">
               <p
-                className="text-[9px] uppercase tracking-widest mb-0.5"
+                className="text-[8px] sm:text-[9px] uppercase tracking-widest mb-0.5"
                 style={{ color: vesakRgb('gold', 0.5), fontFamily: labelFont }}
               >
                 {toLabel}
               </p>
               <p
-                className="text-xs sm:text-sm"
+                className="text-[11px] sm:text-sm leading-tight"
                 style={{
                   color: vesakRgb('cream', 0.7),
                   fontFamily: language === 'si' ? fontSi : fontEnSerif,
                   fontStyle: 'italic',
                 }}
               >
-                {toName}
+                {toName || '..............'}
               </p>
             </div>
-          )}
 
-          <div className="flex items-center gap-2 my-2">
+          <div className="shrink-0 flex items-center gap-1.5 sm:gap-2 my-0.5 sm:my-2">
             <div
               className="flex-1 h-px"
               style={{ background: `linear-gradient(to right, transparent, ${vesakRgb('gold', 0.3)})` }}
@@ -187,7 +186,7 @@ export default function CardPreview({
 
           {poemTitle && (
             <p
-              className="text-[9px] sm:text-xs mb-2 tracking-wide"
+              className="shrink-0 text-[8px] sm:text-xs mb-0.5 sm:mb-1 tracking-wide"
               style={{
                 color: vesakRgb('gold', 0.7),
                 fontFamily: language === 'si' ? fontSi : fontEnDisplay,
@@ -197,17 +196,16 @@ export default function CardPreview({
             </p>
           )}
 
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 min-h-0 flex flex-col justify-start overflow-hidden pt-0 sm:pt-1">
             {poemLines.map((line, i) => (
               <p
                 key={i}
-                className="leading-relaxed"
+                className={`leading-snug sm:leading-relaxed ${poemSizeClass}`}
                 style={{
                   color: vesakRgb('cream', 0.85),
                   fontFamily: language === 'si' ? fontSi : fontEnBody,
                   fontStyle: 'italic',
-                  fontSize: poemLines.length > 4 ? '0.6rem' : '0.7rem',
-                  lineHeight: '1.8',
+                  lineHeight: 1.4,
                 }}
               >
                 {line}
@@ -215,7 +213,7 @@ export default function CardPreview({
             ))}
           </div>
 
-          <div className="flex items-center gap-2 my-2">
+          <div className="shrink-0 flex items-center gap-1.5 sm:gap-2 my-0.5 sm:my-2">
             <div
               className="flex-1 h-px"
               style={{ background: `linear-gradient(to right, transparent, ${vesakRgb('gold', 0.2)})` }}
@@ -225,7 +223,7 @@ export default function CardPreview({
             </div>
           </div>
 
-          <div className="text-right pr-1">
+          <div className="shrink-0 text-right pr-1">
             <p
               className="text-[8px] uppercase tracking-widest"
               style={{ color: vesakRgb('gold', 0.4), fontFamily: labelFont }}
@@ -233,19 +231,19 @@ export default function CardPreview({
               {fromLabel}
             </p>
             <p
-              className="text-xs sm:text-sm"
+              className="text-[11px] sm:text-sm leading-tight"
               style={{
                 color: vesakRgb('cream', 0.7),
                 fontFamily: language === 'si' ? fontSi : fontEnSerif,
                 fontStyle: 'italic',
               }}
             >
-              {fromName || '_______________'}
+              {fromName || '..............'}
             </p>
           </div>
 
           <div
-            className="absolute bottom-6 right-16 text-6xl pointer-events-none select-none"
+            className="absolute bottom-3 right-8 sm:bottom-6 sm:right-16 text-3xl sm:text-6xl pointer-events-none select-none"
             style={{ color: vesakRgb('lotus', 0.05) }}
           >
             🪷
