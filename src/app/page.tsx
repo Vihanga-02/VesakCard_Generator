@@ -1,7 +1,7 @@
 'use client'
 import { useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
-import { Language, Poem, POEMS, UI_TEXT, DEFAULT_VESAK_IMAGES } from '@/lib/data'
+import { Language, Poem, POEMS, UI_TEXT, DEFAULT_VESAK_IMAGES, CardTheme } from '@/lib/data'
 import LanguageToggle from '@/components/LanguageToggle'
 import ImageSelector from '@/components/ImageSelector'
 import PoemSelector from '@/components/PoemSelector'
@@ -14,6 +14,7 @@ const StarField = dynamic(() => import('@/components/StarField'), { ssr: false }
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>('si')
+  const [theme, setTheme] = useState<CardTheme>('dark')
   const [selectedImageId, setSelectedImageId] = useState(DEFAULT_VESAK_IMAGES[0].id)
   const [selectedImageSrc, setSelectedImageSrc] = useState(DEFAULT_VESAK_IMAGES[0].src)
   const [customImage, setCustomImage] = useState<string | null>(null)
@@ -41,8 +42,8 @@ export default function Home() {
   }
 
   const handleDownload = useCallback(async () => {
-    await captureVesakCard()
-  }, [])
+    await captureVesakCard(theme)
+  }, [theme])
 
   return (
     <main className="relative min-h-screen overflow-x-hidden" style={{ background: 'radial-gradient(ellipse at top, #2d1f4e 0%, #1e1535 30%, #0a0612 70%)' }}>
@@ -180,9 +181,36 @@ export default function Home() {
           {/* RIGHT PANEL - Preview */}
           <div className="space-y-5">
             <div className="glass-card rounded-2xl p-5 sm:p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-vesak-lotus animate-pulse" />
-                <p className="section-label">{t.preview}</p>
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-vesak-lotus animate-pulse" />
+                  <p className="section-label">{t.preview}</p>
+                </div>
+                {/* Theme toggle */}
+                <div className="flex items-center bg-vesak-darkest/60 border border-vesak-gold/20 rounded-full p-1">
+                  <button
+                    onClick={() => setTheme('dark')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-display tracking-wider transition-all duration-300 ${
+                      theme === 'dark'
+                        ? 'bg-linear-to-r from-vesak-gold to-vesak-amber text-vesak-darkest shadow-sm'
+                        : 'text-vesak-cream/50 hover:text-vesak-cream/80'
+                    }`}
+                  >
+                    <span>🌙</span>
+                    <span className="hidden sm:inline">{t.themeDark}</span>
+                  </button>
+                  <button
+                    onClick={() => setTheme('light')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-display tracking-wider transition-all duration-300 ${
+                      theme === 'light'
+                        ? 'bg-linear-to-r from-vesak-gold to-vesak-amber text-vesak-darkest shadow-sm'
+                        : 'text-vesak-cream/50 hover:text-vesak-cream/80'
+                    }`}
+                  >
+                    <span>☀️</span>
+                    <span className="hidden sm:inline">{t.themeLight}</span>
+                  </button>
+                </div>
               </div>
 
               {/* Card Preview */}
@@ -193,9 +221,11 @@ export default function Home() {
                 fromName={fromName}
                 toName={toName}
                 language={language}
+                theme={theme}
                 fromLabel={t.fromLabel}
                 toLabel={t.toLabel}
                 happyVesak={t.happyVesak}
+                stampText={t.stampText}
               />
 
               {/* Decorative below preview */}
