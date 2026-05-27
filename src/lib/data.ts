@@ -1,4 +1,5 @@
 export type Language = 'si' | 'en'
+export type CardTheme = 'dark' | 'light'
 
 /** Left image panel: 45% of card width, full height; card is 3:2 → ratio 27:40 */
 export const VESAK_CARD_IMAGE_SIZE = { width: 810, height: 1200 } as const
@@ -123,6 +124,9 @@ export const UI_TEXT = {
     cardBack: 'කාඩ් පිටුපස',
     selectImage: 'පින්තූරය තෝරන්න',
     orUpload: 'හෝ ඔබේ පින්තූරය',
+    stampText: 'මුද්දරය ගගේ ගියා',
+    themeDark: 'Dark',
+    themeLight: 'Light',
   },
   en: {
     title: 'Vesak Card',
@@ -147,5 +151,8 @@ export const UI_TEXT = {
     cardBack: 'Card Back',
     selectImage: 'Select Image',
     orUpload: 'or Upload Yours',
+    stampText: 'Stamp set adrift',
+    themeDark: 'Dark',
+    themeLight: 'Light',
   },
 }
